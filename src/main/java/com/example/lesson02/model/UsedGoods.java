@@ -1,17 +1,16 @@
-package com.lesson02.model;
+package com.example.lesson02.model;
 
 import java.util.Date;
 
 public class UsedGoods {
-   private int id;
-   private int sellerId;
-   private String title;
-   private int price;
-   private String description;
-   private String picture;
-   private Date createdAt;
-   private Date updatedAt;
-   
+    private int id;
+    private int sellerId;
+    private String title;
+    private int price;
+    private String description;
+    private String picture;
+    private Date createdAt;
+    private Date updatedAt;
 	public int getId() {
 		return id;
 	}
@@ -59,7 +58,8 @@ public class UsedGoods {
 	}
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-}
-   
-   
+	}
+    
+    
+    
 }
