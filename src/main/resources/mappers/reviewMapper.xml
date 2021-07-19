@@ -18,4 +18,53 @@
        WHERE
            `id`= #{id}    
     </select>
+    
+    <insert id="insertReview" parameterType="com.example.lesson03.model.Review">
+        INSERT INTO `review` 
+        (
+             
+           `storeName`
+           ,`menu`
+           ,`userName`
+           ,`point`
+           ,`review`
+           ,`createdAt`
+           ,`updatedAt`
+        )
+        VALUES
+        (
+           #{storeName}
+           ,#{menu}
+           ,#{userName}
+           ,#{point}
+           ,#{review}
+           ,NOW()
+           ,NOW()
+        )
+        
+    </insert>
+    
+    <!-- 필드들을 따로따로 넣기 -->
+    <insert id="insertReviewAsField" parameterType="map">
+        INSERT INTO `review`
+        (
+           `storeName`
+           ,`menu`
+           ,`userName`
+           ,`point`
+           ,`review`
+           ,`createdAt`
+           ,`updatedAt` 
+        )
+        VALUES
+        (
+           #{storeName}
+           ,#{menu}
+           ,#{userName}
+           ,#{point}
+           ,#{review}
+           ,NOW()
+           ,NOW()
+        )
+    </insert>
  </mapper>
