@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.lesson04.bo.NewUserBO;
 import com.example.lesson04.model.NewUser;
 
-@Controller
 @RequestMapping("/lesson04")
+@Controller
 public class NewUserController {
 	
 	@Autowired
