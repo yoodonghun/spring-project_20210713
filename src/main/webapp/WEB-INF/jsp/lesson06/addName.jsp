@@ -15,50 +15,61 @@
 	    <b>이름:</b><br>
 	    <div class="d-flex justify-content-start">
 	      <input type="text" id="name" class="form-control col-4" placeholder="이름을 입력하세요">
-	      <button type="button" id="overlapName" class="btn btn-warning ">중복 확인</button>
+	      <button type="button" id="overlapName" class="btn btn-warning ">중복 확인</button><br>
 	      
 	      <div id="statusArea"><span class="text-info"></span></div>
 	      
 	      
 	    </div>  
-	    <button type="submit" class="btn btn-primary mt-4">가입하기</button>
+	    <button type="submit" id="joinBtn" class="btn btn-primary mt-4">가입하기</button>
    </div>
    
    <script>
-     $(document).ready(function(){
-    	 //중복확인 버튼 클릭
-    	 $("#overlapName").on(function(e){
-    		 $("#statusArea").empty();
-    		 
-    		let name = $("#name").val().trim();
-    		
-    		if(name == ''){
-    			$("#statusArea").append("<small class=\'text-danger\'>이름이 비어있습니다</small>");
-    			return;
-    		}
-    		
-    		
-    		//이름이 중복되었는지 AJAX로 확인
-    		$.ajax({
-    			type="get"
-    			,data: {'name': name}
-    			,url: "/lesson06/ex02/is_duplicationd"
-    			,success: function(data){
-    				
-    				//TODO
-    		       //$("#statusArea").append("<small class=\'text-danger\'>이름이 중복되었습니다</small>");
-    				
-    				
+   $(document).ready(function() {
+		// 중복확인 버튼 클릭
+		$('#overlapName').on('click', function() {
+			var name = $('#name').val().trim();
+			
+			$('#statusArea').empty(); // div 태그 안에있는 모든 태그를 비운다.
+			
+			// validation check
+			
+			// 이름이 입력되어 있는지 확인
+			if (name == '') {
+				$('#statusArea').append('<span class="text-danger">이름이 비어있습니다.</span>');
+				return;
+			}
+			
+			// 이름이 중복되는지 확인(DB에서 조회) -> AJAX 통신
+			$.ajax({
+				type:'get',
+				url:'/lesson06/ex02/is_duplication',
+				data:{'name':name},
+				success: function(data) {
+					//alert(data.is_duplication);
+					if (data.is_duplication == true) {
+						$('#statusArea').append('<span class="text-danger">중복된 이름입니다.</span>');
+					}
+				},
+				error: function(e) {
+					alert("실패:" + e);
+				}
+			});
+		});
+    	 //회원가입 버튼 클릭
+    	 $('#joinBtn').on('click', function(e) {
+    			e.preventDefault(); // 바로 서브밋 되는 것 방지
+    			
+    			console.log($('#statusArea').children().length);
+    			
+    			// 만약 nameStatusArea에 아무 자식노드(태그)가 없다면 서브밋을 한다.
+    			if ($('#statusArea').children().length == 0) {
+    				alert("서브밋 가능");
+    			} else {
+    				alert("서브밋 불가");
     			}
-    			,error: function(e){
-    				alert('error': + e);
-    			}
-    		})
-    		
-    		
-    	 });
-    	 
-     });
+    		});
+    	});
    </script>
 </body>
 </html>

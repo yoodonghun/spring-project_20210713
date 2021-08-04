@@ -24,19 +24,17 @@ public class lessono06Ex02Controller {
 	   return "lesson06/addName";
    }
    
-   @GetMapping("lesson06/is_duplication")
+   @GetMapping("/is_duplication")
    @ResponseBody  //AJAX의 요청이므로 ResponseBody로 추가
    public Map<String, Boolean> isDuplication(
 		   @RequestParam("name") String name){
 	   
-	   boolean isDuplication = newUserBO.existNewuserByName(name);
+	  
 	   
 	   Map<String , Boolean> result = new HashMap<>();
-	   result.put("is_duplication", );
+	   result.put("is_duplication", newUserBO.existNewUserByName(name) );
 	   return result;
    }
    
-   public boolean existNewUserByName(String name) {
-	   return newUserBO.existNewUserByName(name);
-   }
+  
 }
